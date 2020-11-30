@@ -7,28 +7,28 @@ const cuid = require('cuid');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('./Develop/public'));
+app.use(express.static('/Develop/public'));
 
-const notes = require('./Develop/db/db.json');
+const notes = require('/Develop/db/db.json');
 
 // note functions
 function newNote(note, notesArray) {
   notesArray.push(note);
-  fs.writeFileSync(path.join(__dirname, './Develop/db/db.json'), JSON.stringify(notesArray, null, 2));
+  fs.writeFileSync(path.join(__dirname, '/Develop/db/db.json'), JSON.stringify(notesArray, null, 2));
 };
 
 function deleteNote(noteId) {
   const newDb = notes.filter(note => note.id != noteId);
-  fs.writeFileSync(path.join(__dirname, './Develop/db/db.json'), JSON.stringify(newDb, null, 2));
+  fs.writeFileSync(path.join(__dirname, '/Develop/db/db.json'), JSON.stringify(newDb, null, 2));
 };
 
 // get paths
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './Develop/public/index.html'));
+  res.sendFile(path.join(__dirname, '/Develop/public/index.html'));
 });
 
 app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
+  res.sendFile(path.join(__dirname, '/Develop/public/notes.html'));
 });
 
 app.get('/api/notes', (req, res) => {
