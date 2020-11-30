@@ -18,8 +18,14 @@ function newNote(note, notesArray) {
 };
 
 function deleteNote(noteId) {
-  const newDb = notes.filter(note => note.id != noteId);
-  fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(newDb, null, 2));
+  for (i = notes.length - 1; i >= 0; i--) {
+    if (noteId === notes[i].id) {
+      notes.splice(i, 1);
+    }
+  }
+  fs.writeFile('db/db.json', JSON.stringify(notes, null, 2), err => {
+    if (err) throw err;
+  });
 };
 
 // get paths
@@ -43,7 +49,8 @@ app.post('/api/notes', (req, res) => {
 
 // delete path
 app.delete('/api/notes/:id', (req, res) => {
-  res.send(deleteNote(req.params.id));
+  deleteNote(req.params.id);
+  res.json(notes);
 });
 
 // listen port
