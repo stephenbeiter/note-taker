@@ -3,18 +3,18 @@ const path = require('path');
 const express = require('express');
 const port = process.env.PORT || 3001;
 const app = express();
-const notes = require('./Develop/db/db.json');
 const cuid = require('cuid');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('./Develop/public'));
 
+const notes = require('./Develop/db/db.json');
+
 // note functions
 function newNote(note, notesArray) {
   notesArray.push(note);
   fs.writeFileSync(path.join(__dirname, './Develop/db/db.json'), JSON.stringify(notesArray, null, 2));
-  return note;
 };
 
 function deleteNote(noteId) {
@@ -43,7 +43,7 @@ app.post('/api/notes', (req, res) => {
 
 // delete path
 app.delete('/api/notes/:id', (req, res) => {
-  res.json(deleteNote(req.params.id));
+  res.send(deleteNote(req.params.id));
 });
 
 // listen port

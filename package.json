@@ -6,7 +6,8 @@
   "dependencies": {
     "cuid": "^2.1.8",
     "express": "^4.17.1",
-    "nanoid": "^3.1.18"
+    "nanoid": "^3.1.18",
+    "path": "^0.12.7"
   },
   "devDependencies": {},
   "scripts": {
