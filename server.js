@@ -4,6 +4,7 @@ const express = require('express');
 const port = process.env.PORT || 3001;
 const app = express();
 const notes = require('./Develop/db/db.json');
+const cuid = require('cuid');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -16,10 +17,9 @@ function newNote(note, notesArray) {
   return note;
 };
 
-function filterNotes(noteId) {
-  const result = notes.filter(note => note.id !== noteId);
-
-  fs.writeFileSync(path.join(__dirname, './Develop/db/db.json'), JSON.stringify(result, null, 2));
+function deleteNote(noteId) {
+  const newDb = notes.filter(note => note.id != noteId);
+  fs.writeFileSync(path.join(__dirname, './Develop/db/db.json'), JSON.stringify(newDb, null, 2));
 };
 
 // get paths
@@ -37,13 +37,13 @@ app.get('/api/notes', (req, res) => {
 
 // post path
 app.post('/api/notes', (req, res) => {
-  req.body.id = notes.length.toString();
+  req.body.id = cuid();
   res.json(newNote(req.body, notes));
 });
 
 // delete path
 app.delete('/api/notes/:id', (req, res) => {
-  filterNotes(req.params.id);
+  res.json(deleteNote(req.params.id));
 });
 
 // listen port
