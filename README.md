@@ -1,5 +1,6 @@
 # note-taker
 ![License Badge](https://img.shields.io/badge/license-ISC-green)
+![notetakergif](/img/note-taker.gif?raw=true "note-taker")
 ## Description
 This is a simple app to make and save personal notes and reminders.  It uses a json file as a database to save notes on the server side.
 ## Table of Contents
