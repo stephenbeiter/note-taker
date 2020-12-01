@@ -19,7 +19,7 @@ This project is covered under the ISC license.
 ## Contributing
 This project is not available for contributions.
 ## Tests
-This project is not available for testing.
+Test out the app [here on heroku](https://peaceful-hamlet-95311.herokuapp.com/)
 ## Questions
 GitHub: [github.com/stephenbeiter](http://github.com/stephenbeiter)  
 Email: [stephenbeiter@gmail.com](mailto:stephenbeiter@gmail.com)
